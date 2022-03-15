@@ -9,11 +9,31 @@ const Account = (props) => {
     e.preventDefault()
     if (isNaN(amount)) {
       console.log('Not a number')
+    } else if(Number(amount)< 0) {
+      alert(`ERROR: Can't deposit negative value. Use 'Withdraw' to receive money from your account.`)
     } else {
       setBalance(balance + Number(amount))
     }
     setAmount(0)
   }
+
+  const withdrawClick = (e) => {
+    e.preventDefault()
+    if (isNaN(amount)) {
+      console.log('Not a number')
+    } else if(Number(amount)< 0) {
+      alert(`ERROR: Can't withdraw negative value. Use 'Deposit' to add money to your account.`)
+    } else if(balance - Number(amount)< 0) {
+      alert("ERROR: Not enough funds")
+    } else {
+      setBalance(balance - Number(amount))
+    }
+    setAmount(0)
+  }
+
+
+
+
 
   let balanceClass = 'balance'
   if (balance <= 0) {
@@ -40,6 +60,12 @@ const Account = (props) => {
           type="submit"
           value="Deposit"
           onClick={handleClick}
+        />
+                <input
+          className="btn"
+          type="submit"
+          value="Withdraw"
+          onClick={withdrawClick}
         />
       </div>
     </div>
